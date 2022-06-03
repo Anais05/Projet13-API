@@ -67,3 +67,21 @@ module.exports.updateUserProfile = async (req, res) => {
 
   return res.status(response.status).send(response)
 }
+
+
+module.exports.getUserAccounts = async (req, res) => {
+  let response = {}
+
+  try {
+    const responseFromService = await userService.getUserAccounts(req)
+    response.status = 200
+    response.message = 'Successfully got user accouts'
+    response.body = responseFromService
+  } catch (error) {
+    console.log('Error in userController.js')
+    response.status = 400
+    response.message = error.message
+  }
+
+  return res.status(response.status).send(response)
+}

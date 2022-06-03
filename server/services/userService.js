@@ -1,6 +1,8 @@
 const User = require('../database/models/userModel')
+const Accounts = require('../database/models/accountModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { ObjectId } = require('mongodb')
 
 module.exports.createUser = async serviceData => {
   try {
@@ -89,6 +91,23 @@ module.exports.updateUserProfile = async serviceData => {
     }
 
     return user.toObject()
+  } catch (error) {
+    console.error('Error in userService.js', error)
+    throw new Error(error)
+  }
+}
+
+module.exports.getUserAccounts = async serviceData => {
+  try {
+    const jwtToken = serviceData.headers.authorization.split('Bearer')[1].trim()
+    const decodedJwtToken = jwt.decode(jwtToken)
+    const accounts = await Accounts.find({_userId: ObjectId(`${decodedJwtToken.id}`)})
+
+    if (!accounts) {
+      throw new Error('Accounts not found!')
+    }
+
+    return accounts
   } catch (error) {
     console.error('Error in userService.js', error)
     throw new Error(error)
