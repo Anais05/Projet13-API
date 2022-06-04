@@ -75,7 +75,7 @@ module.exports.getUserAccounts = async (req, res) => {
   try {
     const responseFromService = await userService.getUserAccounts(req)
     response.status = 200
-    response.message = 'Successfully got user accouts'
+    response.message = 'Successfully got user accounts'
     response.body = responseFromService
   } catch (error) {
     console.log('Error in userController.js')
