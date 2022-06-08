@@ -141,7 +141,7 @@ paths:
         - Bearer: []
       tags:
         - User Accounts
-      summary: User Account API
+      summary: User Transactions API
       description: API for fetching transactions of a account
       parameters:
         - in: header
@@ -171,7 +171,7 @@ paths:
         - Bearer: []
       tags:
         - User Accounts
-      summary: User Account API
+      summary: User Transactions API
       description: API for updating a transaction
       parameters:
         - in: header
